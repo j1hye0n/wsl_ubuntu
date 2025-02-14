@@ -92,7 +92,7 @@ set	background=dark
 "let	g:gruvbox_contrast_dark='hard'
 let	g:gruvbox_italic=1
 set	termguicolors
-colorscheme gruvbox
+colorscheme	gruvbox
 
 " plugin:nerdtree&tagbar
 let g:NERDTreeWinSize=20
@@ -131,7 +131,6 @@ Plug 'MarcWeber/vim-addon-mw-utils'
 Plug 'honza/vim-snippets'
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
-
 
 call plug#end()
 
@@ -204,5 +203,3 @@ iabbr	<expr>	__date		strftime("%Y-%m-%d %H:%M:%S")
 iabbr	<expr>	__file		expand('%:p')
 iabbr	<expr>	__name		expand('%')
 iabbr	<expr>	__pwd		expand('%:p:h')
-
-
