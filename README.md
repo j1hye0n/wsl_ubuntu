@@ -24,6 +24,12 @@ Shift + v 비쥬얼라인 진입
 
 :%s /” “/” “/g 문자 대체작성
 
+rm 파일 삭제
+
+rmdir 디렉토리 삭제
+
+-rf 안에 든 파일 관계없이 삭제
+
 
 ## Setting of Ubuntu
 
