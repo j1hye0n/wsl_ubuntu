@@ -30,6 +30,8 @@ rmdir 디렉토리 삭제
 
 -rf 안에 든 파일 관계없이 삭제
 
+:e ~/file_path 다른파일로 이동
+
 
 ## Setting of Ubuntu
 
