@@ -3,9 +3,6 @@ based on vlsisys
 
 
 ## Vim 단축키
-
-
-### visual mode
 ctrl + u / ctrl + d 이동키
 
 c 잘라내기
@@ -31,6 +28,8 @@ rmdir 디렉토리 삭제
 -rf 안에 든 파일 관계없이 삭제
 
 :e ~/file_path 다른파일로 이동
+
+들여쓰기 수정 : shift v로 전체 단락 잡고 "<" or ">"로 조절
 
 
 ## Setting of Ubuntu
