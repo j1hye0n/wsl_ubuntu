@@ -172,7 +172,8 @@ nmap \m			:call cstFuncs#ToggleGUIMenu()<CR>
 
 nmap ga			:Tabularize /
 
-cmap run		:!python3 %
+cmap pyrun		:!python3 %
+cmap crun		:!gcc %
 cmap rr			:source %
 
 map ,n			:noh<CR>
