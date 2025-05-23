@@ -35,11 +35,13 @@ rmdir 디렉토리 삭제
 ## Setting of Ubuntu
 
 
-1. gvim 안열릴때
+1. gvim 등 gui 기능 지원 안될때
 > export DISPLAY=:0.0
 > echo $DISPLAY
+> echo $DISPLAY 값이 120.0.0.1:* 로 나오면 gui 기능 x
 
 => :0.0 되는지 확인
+
 
 2. new user authority
 
@@ -48,6 +50,19 @@ rmdir 디렉토리 삭제
 > wsl -d <DistroName> -u root
 > su -
 > usermod -aG sudo <username>
+
+
+3. 사용자가 등록되어있지만 root가 메인 디렉토리로 인식될때
+//powershell
+> ubuntu2204(.exe) config --default-user hyeon(username)
+> C:\Users\username\AppData\Local\Microsoft\WindowsApps\  // wsl .exe path
+
+
+4. 드라이브 이동
+//powershell
+> wsl --export Ubuntu-22.04 D:\wsl_backup.tar // 현재 wsl 압축해서 내보내기
+> wsl --unregister Ubuntu-22.04 // D폴더(기존 wsl) 삭제
+> wsl --import Ubuntu-22.04 C:\WSL D:\wsl_backup.tar // c드라이브에 재설치 , 설정 유지
 
 ### to check DistroName
 > wsl -list -all
