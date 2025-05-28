@@ -58,6 +58,15 @@ rmdir 디렉토리 삭제
 > C:\Users\username\AppData\Local\Microsoft\WindowsApps\  // wsl .exe path
 
 
+또는
+//bash
+> sudo vim /etc/wsl.conf
+//vim
+> [user]
+> default=user
+
+
+
 4. 드라이브 이동
 //powershell
 > wsl --export Ubuntu-22.04 D:\wsl_backup.tar // 현재 wsl 압축해서 내보내기
