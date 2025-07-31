@@ -10,11 +10,11 @@ set guioptions-=T
 set guioptions-=l
 set guioptions-=r
 set guioptions-=b				"m: menu, T: toolbar, l,r,b: scrollbar
-set guifont=JectBrainsMono\ 16
+set guifont=JetbrainsMono\ 16
 set laststatus=2				" Set whether or not to display a status line in the last window
 set lazyredraw					" The screen does not update when you are in the middle of an action (such as a macro)
 set linebreak					" Lines are truncated on a word-by-word basis
-set linespace=4					" Set the distance between rows, default is 0
+set linespace=2					" Set the distance between rows, default is 0
 set	number						" Shows the line number on the left side of the screen
 set	numberwidth=4				" Sets the width of the line number on the left side of the screen. The default is 4
 set	relativenumber				" Show line numbers relative to cursor position
@@ -35,21 +35,24 @@ set	nolist
 set	wildmenu					" Extend command-line autocomplete to make it more convenient
 set	wildmode=list:full			" wildmenu display option
 set	viewdir=~/.vim/view			" Directory for vim view file
-set encoding=utf-8
-set fileencodings=utf-8,cp949
+set	textwidth=0
+set	wrapmargin=1
+
 augroup remember_folds
 	autocmd!
 	autocmd BufWinLeave *.* mkview
 	autocmd BufWinEnter *.* silent! loadview
 augroup END
 
+"autocmd FileType c      setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*//'
+"autocmd FileType python setlocal foldmethod=expr foldexpr=getline(v:lnum)=~'^\\s*#'
 "==================================================
 " Basic Setting: Vim Env. & Editing
 "==================================================
 set loadplugins
-filetype on						" Enable type file detection. Vim will be able to try to detect the type of file in use.
-filetype plugin on				" Enable plugins and load plugin for the detected file type.
-filetype indent on				" Load an indent file for the detected file type.
+filetype plugin indent on		" Enable type file detection. Vim will be able to try to detect the type of file in use.
+"filetype plugin on				" Enable plugins and load plugin for the detected file type.
+"filetype indent on				" Load an indent file for the detected file type.
 syntax on						" Turn syntax highlighting on.
 
 set	tags=~/projects/tags
@@ -62,7 +65,8 @@ set	backspace=indent,eol,start	" This option sets the delete function for the <B
 set	backup						" Create a backup before overwriting and saving the file
 set	backupdir=~/.vim/backup		
 set	cindent						" Automatically apply C-style indentation when editing
-set	clipboard=unnamed			" Associating the unnamed register with the clipboard where all copy/delete operations are entered
+"set	clipboard=unnamed			" Associating the unnamed register with the clipboard where all copy/delete operations are entered
+set clipboard+=exclude:.*
 set	nocompatible				" Sets the compatibility with the VI
 "set	complete
 set confirm						" Get confirmation from the user when using commands like :q, :bd, etc
@@ -102,8 +106,8 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 let	g:syntastic_always_populate_loc_list = 1
-let	g:syntastic_auto_loc_list            = 0
-let	g:syntastic_check_on_open            = 0
+let	g:syntastic_auto_loc_list            = 1
+let	g:syntastic_check_on_open            = 1
 let	g:syntastic_check_on_wq              = 1
 let	g:syntastic_error_symbol             = 'E'
 let	g:syntastic_warning_symbol           = 'W'
@@ -114,35 +118,12 @@ let	g:syntastic_cpp_compiler             = 'g++'
 let	g:syntastic_cpp_compiler_options     = '-std=c++14'
 
 " plugin:snipMate
-"imap <C-J> <Plug>snipMateNextOrTrigger
+imap <C-J> <Plug>snipMateNextOrTrigger
 
 " for indent conflict during verilog coding
-"autocmd	FileType * setlocal comments-=://
-"set	formatoptions-=r
-
-"==================================================
-" Snippet FileType
-"==================================================
-call plug#begin('~/.vim/plugged')
-
-Plug 'garbas/vim-snipmate'
-Plug 'tomtom/tlib_vim'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'honza/vim-snippets'
-Plug 'morhetz/gruvbox'
-Plug 'preservim/nerdtree'
-
-call plug#end()
-
-au BufRead,BufNewfile *.v set filetype=verilog
-au BufRead,BufNewfile *.sv set filetype=verilog
-au BufRead,BufNewfile *.py set filetype=python3
-
-let g:snips_expand_trigger = '<tab>'
-let g:snips_jump_forward_trigger = '<tab>'
-let g:snips_jump_backward_trigger = '<s-tab>'
-
-
+autocmd	FileType * setlocal comments-=://
+set	formatoptions-=r
+au		BufNewFile,BufRead *.v		setf verilog
 "==================================================
 " Map Setting
 "==================================================
@@ -170,13 +151,10 @@ nmap \l			:call cstFuncs#ToggleCursorLine()<CR>
 nmap \c			:call cstFuncs#ToggleListChars()<CR>
 nmap \m			:call cstFuncs#ToggleGUIMenu()<CR>
 
-nmap ga			:Tabularize /
-
-cmap pyrun		:!python3 %
-cmap crun		:!gcc %
-cmap rr			:source %
+map ga			:Tabularize /
 
 map ,n			:noh<CR>
+map ,f			:%! find ./ -type f \| xargs grep -i "
 map ,,i			:call verilog#VInst(0)<CR>
 map ,,t			:call verilog#VInst(1)<CR>
 
@@ -186,8 +164,10 @@ map	<F4>		:SyntasticToggleMode<CR>
 map <F5>		:TagbarToggle<CR>
 map <F8>		:w <CR> :!ivg	%:r:s?_tb??<CR><CR>
 map <F9>		:w <CR> :!iv	%:r:s?_tb??<CR><CR>
+map	<F10>		:w <CR> :!yosys -p "read_verilog % ; hierarchy -check; synth;" > ./log/yosys.log<CR> :!gvim ./log/yosys.log<CR>
 
-map <F11>		: w <CR> : !python3 %<CR><CR>
+"map <F11>		: w <CR> : !python3 %<CR><CR>
+map <F11>		: w <CR> : !gem5 %:r<CR><CR>
 map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=ilp32 -g -Wall %:t -o %:t:r <CR>
 "map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32imac -mabi=ilp32 -g -Wall %:t -o %:t:r <CR>
 "map <F12>		: w <CR> : !clear; gcc -g -Wall %:t -o %:t:r && ./%:t:r<CR>
@@ -196,6 +176,11 @@ map <F12>		: w <CR> : !clear; riscv64-unknown-linux-gnu-gcc -march=rv32i -mabi=i
 map <C-LEFT>	: tabprev<CR>
 map <C-RIGHT>	: tabnext<CR>
 map <C-n>		: tabnew<CR>
+
+" setting cmap
+cmap pyrun		:!python3 %
+cmap crun		:!gcc %
+cmap rr			:source %
 
 "==================================================
 " Abbreviate
