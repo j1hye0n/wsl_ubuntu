@@ -25,12 +25,13 @@ add_files -tb <main tb file name>.cpp
 
 # Set the top-level function
 set_top <top module name>
+set top "<top module name>"
 
 # ########################################################
 # Create a solution
 # Define technology and clock rate
 # ########################################################
-set sol_name "solution"
+set sol_name "_solution"
 open_solution -reset $sol_name
 set_part  {<part num>}
 create_clock -period 10
@@ -63,11 +64,11 @@ if {$hls_exec == 1} {
 set gui_dir "./$sol_name/gui"
 file mkdir $gui_dir
 
-if {[file exists "$sol_name/sim/waveform.wdb"]} {
+if {[file exists "<project_name>$sol_name/hls/sim//verilog/$top.wdb"]} {
 	file copy -force "$sol_name/sim/waveform.wdb" "$gui_dir/"
 }
-if {[file exists "$sol_name/.vitis_hls.log"]} {
-	file copy -force "$sol_name/.vitis_hls.log" "$gui_dir/"
+if {[file exists "<project_name>$sol_name/hls/syn/$top.v"]} {
+	file copy -force "<project_name>$sol_name/hls/syn/$top.v" "$gui_dir/"
 }
 
 exit
