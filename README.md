@@ -78,3 +78,17 @@ rmdir 디렉토리 삭제
 
 ### to verify
 > groups <username>
+
+## git
+### init
+> git config --global user.name ""
+> git config --global user.email ""
+
+
+git clone git_address
+### push
+> git add .
+> // or on specific file
+> git add file_name
+> git commit -m "summary"
+> git push origin branch_name
