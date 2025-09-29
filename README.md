@@ -70,7 +70,9 @@ rmdir 디렉토리 삭제
 4. 드라이브 이동
 //powershell
 > wsl --export Ubuntu-22.04 D:\wsl_backup.tar // 현재 wsl 압축해서 내보내기
+> 
 > wsl --unregister Ubuntu-22.04 // D폴더(기존 wsl) 삭제
+> 
 > wsl --import Ubuntu-22.04 C:\WSL D:\wsl_backup.tar // c드라이브에 재설치 , 설정 유지
 
 ### to check DistroName
@@ -82,13 +84,18 @@ rmdir 디렉토리 삭제
 ## git
 ### init
 > git config --global user.name ""
+> 
 > git config --global user.email ""
 
 
 git clone git_address
 ### push
 > git add .
+> 
 > // or on specific file
+> 
 > git add file_name
+> 
 > git commit -m "summary"
+> 
 > git push origin branch_name
