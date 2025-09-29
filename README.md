@@ -86,9 +86,9 @@ rmdir 디렉토리 삭제
 > git config --global user.name ""
 > 
 > git config --global user.email ""
-
-
-git clone git_address
+> 
+> git clone git_address
+> 
 ### push
 > git add .
 > 
